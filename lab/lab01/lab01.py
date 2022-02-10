@@ -33,14 +33,17 @@ def sum_digits(y):
     6
     """
     "*** YOUR CODE HERE ***"
-    count = 10 
+    count = 0 
+    num = y 
+    number = 0
     total = 0
-    while y // 10 != 0:
-        total = y //10 
-        count = count * 10 
-        y = y / 10
+    while y // 10 > 0:
+        number += (y % 10)
+        count +=1 
+        y = y // 10
+    total = y + number    
     return total
-
+    
 def double_eights(n):
     """Return true if n has two eights in a row.
     >>> double_eights(8)
