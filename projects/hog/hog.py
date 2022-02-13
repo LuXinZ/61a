@@ -39,7 +39,7 @@ def roll_dice(num_rolls, dice=six_sided):
 def picky_piggy(score):
     """Return the points scored from rolling 0 dice.
 
-    score:  The opponent's current score.
+    score:  The opponent's current score.Implement hefty_hogs_strategy, which returns 0 whenever rolling 0 would give at least threshold points and returns num_rolls otherwise.
     """
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
@@ -226,24 +226,18 @@ def announce_highest(who, last_score=0, running_high=0):
     """
     assert who == 0 or who == 1, 'The who argument should indicate a player.'
     # BEGIN PROBLEM 7
-    "*** YOUR CODE HERE ***"
-    def fn (num1,num2):
-        if who ==0 :
-            if num1 >  last_score:
-                high = num1 - last_score
-                if high >  running_high:
-                    global running_high = high
-                    print(running_high + " point(s)! That's a record gain for Player " +who +"!")
-            ls = num1
-        else:
-            if num2 > last_score:
-                high = num2 - last_score 
-                if high> running_high:
-                    global running_high = high
-                    print(running_high + " point(s)! That's a record gain for Player " +who +"!")
-            ls = num2
 
-    return fn
+    "*** YOUR CODE HERE ***"
+    def say(score0,score1):
+        if who ==0:
+            if score0 - last_score > running_high:
+                print(score0 - last_score , "point(s)! That's a record gain for Player 0!")
+            return announce_highest(who,score0,max(score0 - last_score,running_high))
+        else :
+            if score1 - last_score > running_high: 
+                print(score1 - last_score , "point(s)! That's a record gain for Player 1!")
+            return announce_highest(who,score1,max(score1 - last_score, running_high))
+    return say
     # END PROBLEM 7
 
 
@@ -284,6 +278,15 @@ def make_averaged(original_function, trials_count=1000):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    def fn (*args):
+        count =0 
+        result = 0
+        while count < trials_count:
+            result += original_function(*args)
+            count += 1 
+        result = result / trials_count
+        return result
+    return fn  
     # END PROBLEM 8
 
 
@@ -297,6 +300,17 @@ def max_scoring_num_rolls(dice=six_sided, trials_count=1000):
     1
     """
     # BEGIN PROBLEM 9
+    count = 1 
+    total = 0 
+    totalCount = 0
+    fn = make_averaged(roll_dice, trials_count)    
+    while count <= 10:
+        total1= fn(count,dice)
+        if total1 > total:
+            totalCount = count
+            total = total1
+        count +=1 
+    return totalCount
     "*** YOUR CODE HERE ***"
     # END PROBLEM 9
 
@@ -338,7 +352,11 @@ def picky_piggy_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     returns NUM_ROLLS otherwise.
     """
     # BEGIN PROBLEM 10
-    return 6  # Remove this line once implemented.
+    result = picky_piggy(opponent_score) 
+    if result  >= cutoff:
+        return  0
+    else :
+        return num_rolls  
     # END PROBLEM 10
 
 
@@ -348,7 +366,10 @@ def hog_pile_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     Otherwise, it returns NUM_ROLLS.
     """
     # BEGIN PROBLEM 11
-    return 6  # Remove this line once implemented.
+    num = picky_piggy(opponent_score)
+    if score + num == opponent_score:
+        return 0 
+    return picky_piggy_strategy(score, opponent_score,cutoff,num_rolls)
     # END PROBLEM 11
 
 
