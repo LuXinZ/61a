@@ -16,7 +16,9 @@ def lambda_curry2(func):
     "*** YOUR CODE HERE ***"
      
     def fn(x):
-       return func(x) 
+        def h(y) :
+            return func(x,y)
+        return h 
     return fn 
 
 
@@ -60,6 +62,15 @@ def count_cond(condition):
     """
     "*** YOUR CODE HERE ***"
 
+    def f(n):
+        count = 1 
+        total = 0
+        while count <= n :
+            if condition(n,count):
+                total +=1
+            count += 1
+        return total 
+    return f 
 
 def composer(f, g):
     """Return the composition function which given x, computes f(g(x)).
