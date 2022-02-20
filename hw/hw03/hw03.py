@@ -22,9 +22,16 @@ def num_eights(pos):
     ...       ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr'])
     True
     """
-    "*** YOUR CODE HERE ***"
-
-
+    if pos < 10:
+        if pos % 10 ==8:
+            return 1 
+        else :
+            return 0
+    if pos %10 ==8:
+     
+        return num_eights(pos // 10) + 1 
+    else :
+        return  num_eights(pos // 10) 
 def pingpong(n):
     """Return the nth element of the ping-pong sequence.
 
@@ -59,6 +66,16 @@ def pingpong(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    def one(one_number):
+        return one_number * -1 
+    def re(m,j,t):
+        if m > n :
+            return t 
+        if num_eights(m) > 0 or m % 8 == 0:
+            return re(m + 1, one(j),t + j )  
+
+        return re(m + 1,j,t + j ) 
+    return re(1,1,0)   
 
 
 def missing_digits(n):
@@ -89,7 +106,10 @@ def missing_digits(n):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    s_number = n % 10  
+    def count (number):
+       return 1  
+    count(s_number) 
 
 def ascending_coin(coin):
     """Returns the next ascending coin in order.
