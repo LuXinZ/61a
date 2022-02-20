@@ -106,11 +106,15 @@ def missing_digits(n):
     True
     """
     "*** YOUR CODE HERE ***"
-    s_number = n % 10  
-    def count (number):
-       return 1  
-    count(s_number) 
-
+    def count (t,l,next):
+        if l == 0:
+            return t
+        if next > l % 10 :
+            t = (next - l % 10) - 1 + t  
+            return count (t,l // 10 , l % 10)
+        else :
+            return count(t, l// 10, l % 10)
+    return count(0, n // 10, n % 10 )    
 def ascending_coin(coin):
     """Returns the next ascending coin in order.
     >>> ascending_coin(1)
