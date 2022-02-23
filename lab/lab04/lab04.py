@@ -61,6 +61,11 @@ def paths(m, n):
     """
     "*** YOUR CODE HERE ***"
 
+    if m < 1 or n < 1:
+        return 0 
+    if m == 1 and n == 1 :
+        return 1 
+    return   paths(m- 1, n) + paths(m, n- 1)
 
 def couple(s, t):
     """Return a list of two-element lists in which the i-th element is [s[i], t[i]].
@@ -76,8 +81,9 @@ def couple(s, t):
     """
     assert len(s) == len(t)
     "*** YOUR CODE HERE ***"
-
-
+    for index in range(len(s)):
+       t[index] = [s[index],t[index]]
+    return t
 def coords(fn, seq, lower, upper):
     """
     >>> seq = [-4, -2, 0, 1, 3]
