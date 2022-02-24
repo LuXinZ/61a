@@ -31,6 +31,13 @@ def choose(paragraphs, select, k):
     """
     # BEGIN PROBLEM 1
     "*** YOUR CODE HERE ***"
+    index = k
+    while index < len(paragraphs) :
+        if select(paragraphs[index]):
+            return paragraphs[index]
+        else :
+            paragraphs.pop(index)
+    return ''
     # END PROBLEM 1
 
 
