@@ -57,6 +57,14 @@ def about(topic):
     assert all([lower(x) == x for x in topic]), 'topics should be lowercase.'
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
+    def count (str):
+        str = split(lower(remove_punctuation(str)))       
+        for index in range(len(topic)):
+            for j in range(len(str)):
+                if str[j]  == topic[index]:
+                    return True 
+        return False
+    return count  
     # END PROBLEM 2
 
 
@@ -87,6 +95,12 @@ def accuracy(typed, reference):
     reference_words = split(reference)
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
+    count = 0
+
+    for index in range(len(typed_words)) : 
+        if typed_words[index]  == reference_words[index]:
+            count += 1  
+    return count / len(typed_words) * 100
     # END PROBLEM 3
 
 
