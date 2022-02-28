@@ -154,6 +154,22 @@ def autocorrect(typed_word, valid_words, diff_function, limit):
     """
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    total = 0
+
+    saveIndex  = 0
+    for index in range(len(valid_words)):
+        if valid_words[index] == typed_word:
+            return typed_word 
+        num = diff_function(typed_word,valid_words[index],limit)
+        if index  == 0:   
+            total = num
+        if num < total:
+            saveIndex = index
+            total = num
+    if total > limit:
+        return typed_word
+    else:
+        return valid_words[saveIndex]
     # END PROBLEM 5
 
 
